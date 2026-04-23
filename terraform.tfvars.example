@@ -1,0 +1,22 @@
+ibmcloud_api_key        = "your-ibm-cloud-api-key"
+ibmcloud_cluster_region = "ca-tor"
+ibmcloud_resource_group = ""
+
+cluster_name_or_id = "my-openshift-cluster"
+
+flo_namespace   = "f5-bnk"
+utils_namespace = "f5-utils"
+
+f5_bigip_k8s_manifest_version = "2.3.0-bnpp-ehf-2-3.2598.3-0.0.17"
+far_repo_url                  = "repo.f5.com"
+
+cneinstance_deployment_size      = "Small"
+cneinstance_gslb_datacenter_name = ""
+
+# Values from flo project outputs:
+#   terraform -chdir=../ibmcloud_schematics_bigip_next_for_kubernetes_2_3_flo output trusted_profile_id
+#   terraform -chdir=../ibmcloud_schematics_bigip_next_for_kubernetes_2_3_flo output cluster_issuer_name
+#   terraform -chdir=../ibmcloud_schematics_bigip_next_for_kubernetes_2_3_flo output cneinstance_network_attachments
+cneinstance_ibm_trusted_profile_id = ""
+cluster_issuer_name                = "sample-issuer"
+cneinstance_network_attachments    = []
