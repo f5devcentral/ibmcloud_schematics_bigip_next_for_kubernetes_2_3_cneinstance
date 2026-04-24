@@ -1,5 +1,15 @@
 # CNEInstance Module Outputs
 
+output "cneinstance_enabled" {
+  description = "Whether CNEInstance was created"
+  value       = var.enabled
+}
+
+output "cneinstance_name" {
+  description = "Name of the CNEInstance resource"
+  value       = var.enabled ? "${var.flo_namespace}-f5-cne-controller" : "N/A"
+}
+
 output "cneinstance_id" {
   description = "The ID of the created CNEInstance resource"
   value       = try(kubernetes_manifest.cneinstance[0].manifest.metadata.name, null)

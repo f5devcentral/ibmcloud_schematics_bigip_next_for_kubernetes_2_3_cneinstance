@@ -1,3 +1,9 @@
+# ============================================================
+# Root Terraform Configuration
+# F5 BNK Orchestrator — deploys to an existing ROKS cluster
+# Modules: cert-manager → flo → cneinstance → license
+# ============================================================
+
 terraform {
   required_version = ">= 1.0"
   required_providers {
@@ -12,10 +18,12 @@ terraform {
   }
 }
 
+# ============================================================
+# Module: cneinstance
+# ============================================================
+
 module "cneinstance" {
   source = "./modules/cneinstance"
-
-  depends_on = [data.ibm_container_cluster_config.cluster_config]
 
   providers = {
     kubernetes = kubernetes
@@ -39,13 +47,15 @@ module "cneinstance" {
   cneinstance_cloud_env         = true
   cneinstance_cloud_provider    = "ibm"
 
+  # VPC name learned from cluster data source
   cneinstance_vpc_name    = data.ibm_is_vpc.cluster_vpc.name
   cneinstance_cloud_region = var.ibmcloud_cluster_region
 
-  cneinstance_ibm_trusted_profile_id = var.cneinstance_ibm_trusted_profile_id
-  cneinstance_gslb_datacenter_name   = var.cneinstance_gslb_datacenter_name
-  cneinstance_network_attachments    = var.cneinstance_network_attachments
+  cneinstance_ibm_trusted_profile_id = var.trusted_profile_id
 
-  cluster_issuer_name = var.cluster_issuer_name
-  far_repo_url        = var.far_repo_url
+  cneinstance_gslb_datacenter_name = var.cneinstance_gslb_datacenter_name
+  cneinstance_network_attachments  = var.cneinstance_network_attachments
+
+  cluster_issuer_name       = var.cluster_issuer_name
+  far_repo_url              = var.far_repo_url
 }
