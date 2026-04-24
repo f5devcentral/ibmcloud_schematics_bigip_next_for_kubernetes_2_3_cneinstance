@@ -30,13 +30,13 @@ variable "ibmcloud_resource_group" {
 # Cluster Inputs
 # ============================================================
 
-variable "cluster_name_or_id" {
+variable "roks_cluster_name_or_id" {
   description = "Name or ID of the existing OpenShift ROKS cluster to deploy BNK onto"
   type        = string
 
   validation {
-    condition     = length(var.cluster_name_or_id) > 0
-    error_message = "cluster_name_or_id cannot be empty — an existing cluster is required."
+    condition     = length(var.roks_cluster_name_or_id) > 0
+    error_message = "roks_cluster_name_or_id cannot be empty — an existing cluster is required."
   }
 }
 
@@ -44,7 +44,7 @@ variable "cluster_name_or_id" {
 # FAR / Registry Configuration
 # ============================================================
 
-variable "far_repo_url" {
+variable "flo_far_repo_url" {
   description = "FAR Repository URL for Docker and Helm registry"
   type        = string
   default     = "repo.f5.com"
@@ -60,22 +60,34 @@ variable "flo_namespace" {
   default     = "f5-bnk"
 }
 
-variable "utils_namespace" {
+variable "flo_utils_namespace" {
   description = "Namespace for F5 utility components"
   type        = string
   default     = "f5-utils"
+}
+
+variable "flo_f5_bigip_k8s_manifest_version" {
+  description = "Version of f5-bigip-k8s-manifest chart - used by flo, cneinstance modules"
+  type        = string
+  default     = "2.3.0-bnpp-ehf-2-3.2598.3-0.0.17"
+}
+
+variable "flo_trusted_profile_id" {
+  description = "IBM IAM Trusted Profile ID for provisioning VPC routes"
+  type = string
+  default = ""
+}
+
+variable "flo_cluster_issuer_name" {
+  description = "mTLS certificate issuer name"
+  type = string
+  default = ""
 }
 
 
 # ============================================================
 # CNEInstance Configuration
 # ============================================================
-
-variable "f5_bigip_k8s_manifest_version" {
-  description = "Version of f5-bigip-k8s-manifest chart - used by flo, cneinstance modules"
-  type        = string
-  default     = "2.3.0-bnpp-ehf-2-3.2598.3-0.0.17"
-}
 
 variable "cneinstance_deployment_size" {
   description = "Deployment size for CNEInstance (Small, Medium, Large)"
@@ -93,16 +105,4 @@ variable "cneinstance_network_attachments" {
   description = "The Multus Network Attachment Definitions for the CNEInstance TMM deployments"
   type = list(string)
   default = ["ens3-ipvlan-l2", "macvlan-conf"]
-}
-
-variable "trusted_profile_id" {
-  description = "IBM IAM Trusted Profile ID for provisioning VPC routes"
-  type = string
-  default = ""
-}
-
-variable "cluster_issuer_name" {
-  description = "mTLS certificate issuer name"
-  type = string
-  default = ""
 }

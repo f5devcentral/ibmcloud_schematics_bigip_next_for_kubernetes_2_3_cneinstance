@@ -6,21 +6,21 @@ ibmcloud_cluster_region = "ca-tor"
 ibmcloud_resource_group = ""
 
 # ============================================================
-# Target Cluster (required)
+# ROKs Output
 # ============================================================
-cluster_name_or_id = "my-openshift-cluster"
+roks_cluster_name_or_id = "my-openshift-cluster"
 
 # ============================================================
-# Namespace Configuration
+# FLO Output
 # ============================================================
 flo_namespace   = "f5-bnk"
-utils_namespace = "f5-utils"
+flo_utils_namespace = "f5-utils"
+flo_f5_bigip_k8s_manifest_version      = "2.3.0-bnpp-ehf-2-3.2598.3-0.0.17"
+flo_ibm_trusted_profile_id  = ""
 
 # ============================================================
 # CNEInstance
 # ============================================================
-f5_bigip_k8s_manifest_version      = "2.3.0-bnpp-ehf-2-3.2598.3-0.0.17"
 cneinstance_deployment_size         = "Small"
 cneinstance_gslb_datacenter_name    = ""
-cneinstance_ibm_trusted_profile_id  = ""
 cneinstance_network_attachments     = ["ens3-ipvlan-l2", "macvlan-conf"]
