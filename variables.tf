@@ -44,7 +44,7 @@ variable "roks_cluster_name_or_id" {
 # FAR / Registry Configuration
 # ============================================================
 
-variable "flo_far_repo_url" {
+variable "far_repo_url" {
   description = "FAR Repository URL for Docker and Helm registry"
   type        = string
   default     = "repo.f5.com"
@@ -66,7 +66,7 @@ variable "flo_utils_namespace" {
   default     = "f5-utils"
 }
 
-variable "flo_f5_bigip_k8s_manifest_version" {
+variable "f5_bigip_k8s_manifest_version" {
   description = "Version of f5-bigip-k8s-manifest chart - used by flo, cneinstance modules"
   type        = string
   default     = "2.3.0-bnpp-ehf-2-3.2598.3-0.0.17"
