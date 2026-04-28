@@ -13,3 +13,7 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
+
+# Schematics lifecycle test artifacts
+workspace.json
+test-reports/
