@@ -119,6 +119,8 @@ def parse_tfvars(path):
                 entry = {"name": name, "value": raw, "type": "bool"}
             elif re.match(r'^-?\d+(\.\d+)?$', raw):
                 entry = {"name": name, "value": raw, "type": "number"}
+            elif raw.startswith('['):
+                entry = {"name": name, "value": raw, "type": "list(string)"}
             else:
                 entry = {"name": name, "value": raw.strip('"'), "type": "string"}
             if name in SECURE_VARS:
