@@ -275,18 +275,16 @@ resource "kubernetes_cluster_role_binding" "cneinstance_scc_policies" {
 }
 
 # ============================================================
-# Wait for CNEInstance Pods to Start
+# Wait for SCC Policies to Propagate
 # ============================================================
-# After SCC policies are applied, wait for the FLO operator to
-# process the CNEInstance CR and start pods in both namespaces.
-# f5-bnk pods typically appear within 30s; f5-utils utility
-# components take longer — 300s gives both time to start.
+# After SCC policies are applied, wait briefly for Kubernetes
+# to propagate the new permissions to pods.
 # IBM Schematics compatible - no kubectl or local-exec needed.
 
 resource "time_sleep" "wait_for_scc_policies" {
   count            = var.enabled ? 1 : 0
   depends_on       = [kubernetes_cluster_role_binding.cneinstance_scc_policies]
-  create_duration  = "300s"
+  create_duration  = "30s"
   
   triggers = {
     scc_policies_count = length(kubernetes_cluster_role_binding.cneinstance_scc_policies)
