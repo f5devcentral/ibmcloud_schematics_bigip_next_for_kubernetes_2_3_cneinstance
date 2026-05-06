@@ -1,4 +1,4 @@
-# BIG-IP Next for Kubernetes on IBM ROKS — BNK Deployment build 2.3.0-ehf-2-3.2598.3-0.0.17
+# BIG-IP Next for Kubernetes on IBM ROKS — BNK Deployment 2.3
 
 ## About This Workspace
 
