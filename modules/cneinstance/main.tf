@@ -284,7 +284,7 @@ resource "kubernetes_cluster_role_binding" "cneinstance_scc_policies" {
 resource "time_sleep" "wait_for_scc_policies" {
   count            = var.enabled ? 1 : 0
   depends_on       = [kubernetes_cluster_role_binding.cneinstance_scc_policies]
-  create_duration  = "30s"
+  create_duration  = "100s"
   
   triggers = {
     scc_policies_count = length(kubernetes_cluster_role_binding.cneinstance_scc_policies)
